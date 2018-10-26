@@ -181,7 +181,6 @@
 		}
 
 		public void insere(int id, String nome, int porcentagem) {
-			int i;
 			int resultado = id % vetor.length;
 			vetor[resultado].insereInicio(id, nome, porcentagem);
 		}
@@ -373,22 +372,37 @@
 						aux.setDado4(resultado3);
 		}
 
-//		public void OrdenaDesc(){
-//
-//			No aux = topo;
-//			while(aux != null){
-//				No prox = aux.prox;
-//				while(prox != null){
-//					if (aux.getDado01() < prox.getDado01()) {
-//						int s = aux.getDado01();
-//						aux.setDado01(prox.getDado01());
-//						prox.setDado01(s);
-//					}
-//					prox = prox.prox;
-//				}
-//				aux = aux.prox;
-//			}
-//		}
+		public void OrdenaDesc(){
+
+			No aux = topo;
+			while(aux != null){
+				No prox = aux.prox;
+				while(prox != null){
+					if (aux.getDado01() < prox.getDado01()) {
+						int s = aux.getDado01();
+						int tipo2 = aux.getDado2();
+						int tipo4 = aux.getDado4();
+						int tipoInva = aux.getDadoInv();
+						int id = aux.getId();
+
+						aux.setId(prox.getId());
+						aux.setDado01(prox.getDado01());
+						aux.setDado2(prox.getDado2());
+						aux.setDado4(prox.getDado4());
+						aux.setDadoInv(prox.getDadoInv());
+
+
+						prox.setId(id);
+						prox.setDado01(s);
+						prox.setDado2(tipo2);
+						prox.setDado4(tipo4);
+						prox.setDadoInv(tipoInva);
+					}
+					prox = prox.prox;
+				}
+				aux = aux.prox;
+			}
+		}
 		public void zerar(ListaEncadeada lista){
 			lista.topo=null;
 		}
@@ -447,11 +461,12 @@
 					}
 				}
 
-						No aux = lista.topo;
+
 						lista.CalculaPorcentagem(lista);
-					  //  lista.OrdenaDesc();
+						lista.OrdenaDesc();
 						soma=0;
 						soma2=0;
+						No aux = lista.topo;
 						while(aux!=null){
 							lista2.insere(aux.getId(),lista.getNome(),aux.getDado01());
 							soma = soma+aux.getTotal();
@@ -463,6 +478,7 @@
 						lista.imprimelista(lista);;
 						lista.zerar(lista);
 						System.out.println();
+
 
 			}
             lista2.imprimeTabela();
